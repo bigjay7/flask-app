@@ -83,7 +83,6 @@ class TestIntegration(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
 
         # Vérification en base
-        #0
         with self.app.app_context():
             task = Task.query.get(task_id)
             self.assertTrue(task.is_completed)
