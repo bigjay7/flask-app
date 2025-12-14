@@ -8,16 +8,12 @@ from models import Task, User
 class TestIntegration(unittest.TestCase):
 
     def setUp(self):
-        # Configuration de l'application pour le test
         self.app = create_app()
+        # On force la config pour utiliser SQLite en mémoire
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///:memory:"
         self.app.config['TESTING'] = True
-        # Utilisation de SQLite en mémoire pour isoler les tests
-        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
-        self.app.config['WTF_CSRF_ENABLED'] = False # Pas de CSRF pour les tests simples
-        
         self.client = self.app.test_client()
 
-        # Création du contexte et de la BDD
         with self.app.app_context():
             db.create_all()
 
