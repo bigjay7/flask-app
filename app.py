@@ -48,7 +48,6 @@ def create_app():
         db.create_all()
 
     register_routes(app)
-    # o
     return app
 
 
