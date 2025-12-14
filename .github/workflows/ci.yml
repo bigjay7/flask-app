@@ -29,10 +29,12 @@ jobs:
           ruff check .
 
       - name: Run Tests
+        env:
+          DATABASE_URL: "sqlite:///:memory:"
+          SECRET_KEY: "test_secret_key"
         run: |
           nohup python app.py > app.log 2>&1 &
-          sleep 5
-          python -m unittest discover tests
+          export DATABASE_URL="sqlite:///:memory:"
           pytest
 
   build-validation:
