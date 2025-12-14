@@ -30,6 +30,9 @@ jobs:
 
       - name: Run Tests
         run: |
+          nohup python app.py > app.log 2>&1 &
+          sleep 5
+          python -m unittest discover tests
           pytest
 
   build-validation:
