@@ -8,11 +8,17 @@ from selenium.webdriver.common.by import By
 class TestE2E(unittest.TestCase):
 
     def setUp(self):
-        # Configuration de Chrome (mode sans tête optionnel)
+        # Configuration de Chrome pour le mode CI/CD (Headless)
         options = webdriver.ChromeOptions()
-        # options.add_argument('--headless') # Décommenter pour ne pas voir la fenêtre
+        
+        # OBLIGATOIRE pour GitHub Actions (Linux sans écran)
+        options.add_argument('--headless') 
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        options.add_argument('--disable-gpu')
+        
         self.driver = webdriver.Chrome(options=options)
-        self.driver.implicitly_wait(5) # Attente implicite
+        self.driver.implicitly_wait(5)
         self.base_url = "http://localhost:5000"
 
     def tearDown(self):
