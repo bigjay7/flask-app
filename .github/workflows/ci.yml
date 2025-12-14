@@ -30,7 +30,7 @@ jobs:
 
       - name: Run Tests
         run: |
-          python -m unittest discover tests
+          pytest
 
   build-validation:
     needs: quality-check
